@@ -29,7 +29,7 @@ pipeline {
 
         stage('Deploy with Ansible') {
             steps {
-                sh 'cd Ansible'
+                sh 'cd weatherapp/Ansible'
 
                 sh 'ansible-playbook -i inventory docker-deploy.yml'
             }
