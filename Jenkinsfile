@@ -10,12 +10,12 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                     sh '''
                         if [ -d "weatherapp" ]; then
                             cd weatherapp
                             git checkout main
-                            git pull --rebase origin main  # Pull latest changes
+                            git pull --rebase origin main
                         else
                             git clone https://${GIT_USER_NAME}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git weatherapp
                             cd weatherapp
@@ -27,6 +27,7 @@ pipeline {
         }
     }
 }
+
 
         // stage('Build Docker Image') {
         //     steps {
