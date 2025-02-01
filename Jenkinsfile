@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-     environment {
+    environment {
         DOCKER_IMAGE = "abdelrahmangazy/weatherapp:${BUILD_NUMBER}"
         GIT_REPO_NAME = "weatherapp"
         GIT_USER_NAME = "Abdelrahman142"
@@ -16,27 +16,37 @@ pipeline {
                         cd weatherapp
                         git checkout main
                     '''
+                }
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $DOCKER_IMAGE .'
+                sh '''
+                    cd weatherapp
+                    docker build -t ${DOCKER_IMAGE} .
+                '''
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                sh 'docker push $DOCKER_IMAGE'
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
+                    sh '''
+                        echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+                        docker push ${DOCKER_IMAGE}
+                    '''
+                }
             }
         }
 
         stage('Deploy with Ansible') {
             steps {
-                sh 'cd weatherapp/Ansible'
-
-                sh 'ansible-playbook -i inventory docker-deploy.yml'
+                sh '''
+                    cd weatherapp/Ansible
+                    ansible-playbook -i inventory docker-deploy.yml
+                '''
             }
         }
     }
 }
-
