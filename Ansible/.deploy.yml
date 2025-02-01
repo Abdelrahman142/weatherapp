@@ -1,0 +1,40 @@
+---
+- name: Install Docker on Ubuntu and deploy container
+  hosts: webservers
+  become: yes
+  tasks:
+
+    - name: Install Docker using apt-get
+      shell: |
+       apt-get update
+       apt-get install -y docker.io
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Add vagrant user to Docker group
+      user:
+        name: vagrant
+        group: docker
+        append: yes  # Ensures that vagrant user is added to the docker group if already exists.
+
+    - name: Pull Docker Image
+      docker_image:
+        name: abdelrahmangazy/weatherapp
+        tag: latest
+        source: pull
+
+    - name: Run Docker Container
+      docker_container:
+        name: weatherapp
+        image: abdelrahmangazy/weatherapp:latest
+        state: started
+        restart_policy: always
+        exposed_ports:
+          - "5000"
+        published_ports:
+          - "5000:5000"
+

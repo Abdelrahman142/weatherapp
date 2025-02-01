@@ -1,0 +1,25 @@
+---
+- name: Uninstall HTTP server
+  hosts: webservers  # Replace with your target hosts group or IP
+  become: yes  # Run as sudo
+
+  tasks:
+    - name: Remove Apache (httpd) on RHEL-based systems
+      yum:
+        name: httpd
+        state: absent
+      when: ansible_os_family == "RedHat"
+
+    - name: Remove Apache (apache2) on Debian-based systems
+      apt:
+        name: apache2
+        state: absent
+        purge: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Disable HTTP service
+      service:
+        name: "{{ 'httpd' if ansible_os_family == 'RedHat' else 'apache2' }}"
+        state: stopped
+        enabled: no
+

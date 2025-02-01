@@ -1,0 +1,25 @@
+---
+- name: Install and start HTTP server
+  hosts: webservers  # Replace with your target hosts group or IP
+  become: yes  # Run as sudo
+
+  tasks:
+    - name: Install Apache (httpd) on RHEL-based systems
+      yum:
+        name: httpd
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Install Apache (apache2) on Debian-based systems
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Start and enable HTTP service
+      service:
+        name: "{{ 'httpd' if ansible_os_family == 'RedHat' else 'apache2' }}"
+        state: started
+        enabled: yes
+
