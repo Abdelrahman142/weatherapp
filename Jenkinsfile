@@ -15,7 +15,7 @@ pipeline {
                         if [ -d "weatherapp" ]; then
                             cd weatherapp
                             git checkout main
-                            git pull --rebase origin main
+                            git pull origin main
                         else
                             git clone https://${GIT_USER_NAME}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git weatherapp
                             cd weatherapp
