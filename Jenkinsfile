@@ -50,6 +50,9 @@ pipeline {
         stage('Deploy with Ansible') {
             steps {
                 sh '''
+                    mkdir -p ~/.ssh
+                    echo "$SSH_PRIVATE_KEY1" > ~/.ssh/private_key1
+                    chmod 600 ~/.ssh/private_key1
                     cd weatherapp/Ansible
                     ansible-playbook -i inventory docker-deploy.yml
                 '''
