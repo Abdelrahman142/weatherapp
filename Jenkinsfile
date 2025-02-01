@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+        DOCKERHUB_CREDENTIALS = credentials('docker-cred')
         GIT_CREDENTIALS = credentials('github')
         DOCKER_IMAGE = 'abdelrahmangazy/weatherapp'
     }
