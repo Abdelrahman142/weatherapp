@@ -7,14 +7,21 @@ pipeline {
         GIT_USER_NAME = "Abdelrahman142"
     }
 
-    stages {
+    stages {  // ✅ Corrected: "stages" should contain all stages
+
         stage('Clone Repository') {
             steps {
                 withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                     sh '''
-                        git clone https://${GIT_USER_NAME}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git weatherapp
-                        cd weatherapp
-                        git checkout main
+                        if [ -d "weatherapp" ]; then
+                            cd weatherapp
+                            git checkout main
+                            git pull origin main  # Pull latest changes
+                        else
+                            git clone https://${GIT_USER_NAME}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git weatherapp
+                            cd weatherapp
+                            git checkout main
+                        fi
                     '''
                 }
             }
