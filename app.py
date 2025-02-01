@@ -6,13 +6,7 @@ from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
 # Get API key from environment variable
-from dotenv import load_dotenv
-
-# Load environment variables from .env file
-load_dotenv()
-
-# Get API key from environment variable
-API_KEY = os.getenv("api")
+API_KEY = ("0112c47055eb41bfc80c309bdc11176a")
 DATABASE = "weather.db"
 
 if not API_KEY:
