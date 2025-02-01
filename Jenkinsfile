@@ -1,19 +1,21 @@
 pipeline {
     agent any
 
-    environment {
-        DOCKERHUB_CREDENTIALS = credentials('docker-cred')
-        GIT_CREDENTIALS = credentials('github')
-        DOCKER_IMAGE = 'abdelrahmangazy/weathewrapp'
+     environment {
+        DOCKER_IMAGE = "abdelrahmangazy/weatherapp:${BUILD_NUMBER}"
+        GIT_REPO_NAME = "weatherapp"
+        GIT_USER_NAME = "Abdelrahman142"
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', credentialsId: 'GIT_CREDENTIALS', url: 'https://github.com/Abdelrahman142/weatherapp.git weatherapp'
-                sh 'cd weatherapp'
-            }
-        }
+                withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                    sh '''
+                        git clone https://${GIT_USER_NAME}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git weatherapp
+                        cd weatherapp
+                        git checkout main
+                    '''
 
         stage('Build Docker Image') {
             steps {
