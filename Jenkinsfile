@@ -27,7 +27,7 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        # stage('Build Docker Image') {
             steps {
                 sh '''
                     cd weatherapp
@@ -36,7 +36,7 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image') {
+        # stage('Push Docker Image') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-cred', usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
                     sh '''
