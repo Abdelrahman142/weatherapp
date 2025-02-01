@@ -4,13 +4,14 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('docker-cred')
         GIT_CREDENTIALS = credentials('github')
-        DOCKER_IMAGE = 'abdelrahmangazy/weatherapp'
+        DOCKER_IMAGE = 'abdelrahmangazy/weathewrapp'
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', credentialsId: 'GIT_CREDENTIALS', url: 'https://github.com/Abdelrahman142/weatherapp.git'
+                git branch: 'main', credentialsId: 'GIT_CREDENTIALS', url: 'https://github.com/Abdelrahman142/weatherapp.git weatherapp'
+                sh 'cd weatherapp'
             }
         }
 
