@@ -7,18 +7,11 @@
       command: dpkg --configure -a
       ignore_errors: yes  # Continue even if there are no interruptions
 
-    - name: Update apt cache
-      apt:
-        update_cache: yes
-
-    - name: Install required system packages
-      apt:
-        name:
-          - apt-transport-https
-          - ca-certificates
-          - curl
-          - software-properties-common
-        state: present
+    - name: Check if Docker is installed
+      command: docker --version
+      register: docker_installed
+      ignore_errors: yes
+      changed_when: false
 
     - name: Add Docker GPG key
       apt_key:
@@ -49,10 +42,9 @@
         name: vagrant
         groups: docker
         append: yes
-
-    - name: Pull Docker Image
+    - name: Remove existing image 
+      command: docker rm -f weatherapp && docker rmi -f abdelrahmangazy/weatherapp
+    - name: Get Image From Dockerhub
       command: docker pull abdelrahmangazy/weatherapp:latest
-
     - name: Run Container
-      command: docker run -d -p 5000:5000 --name weatherapp --restart always abdelrahmangazy/weatherapp:latest
-
+      command: docker run -d -p 5000:5000 --name weatherapp abdelrahmangazy/weatherapp:latest
