@@ -9,10 +9,6 @@ app = Flask(__name__)
 API_KEY = ("0112c47055eb41bfc80c309bdc11176a")
 DATABASE = "weather.db"
 
-if not API_KEY:
-    print("Error: API_KEY is not set in .env file!")
-    exit(1)
-
 def init_db():
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
