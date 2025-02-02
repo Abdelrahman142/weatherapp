@@ -44,13 +44,13 @@
         append: yes
     
     - name: Stop the container
-      command: docker stop weatherapp
+      shell: docker stop weatherapp 2>>/dev/null
 
     - name: Remove the container
-      command: docker rm -f weatherapp
+      shell: docker rm -f weatherapp 2>>/dev/null
 
     - name: Remove the Docker image
-      command: docker rmi -f abdelrahmangazy/weatherapp
+      shell: docker rmi -f abdelrahmangazy/weatherapp 2>>/dev/null
 
     - name: Prune unused Docker images
       command: docker image prune -f
