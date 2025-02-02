@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "abdelrahmangazy/weatherapp:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "abdelrahmangazy/weatherapp:latest"
         GIT_REPO_NAME = "weatherapp"
         GIT_USER_NAME = "Abdelrahman142"
     }
