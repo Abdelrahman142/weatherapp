@@ -42,9 +42,22 @@
         name: vagrant
         groups: docker
         append: yes
-    - name: Remove existing image 
-      command: docker rm -f weatherapp && docker rmi -f abdelrahmangazy/weatherapp
+    
+    - name: Stop the container
+      command: docker stop weatherapp
+
+    - name: Remove the container
+      command: docker rm -f weatherapp
+
+    - name: Remove the Docker image
+      command: docker rmi -f abdelrahmangazy/weatherapp
+
+    - name: Prune unused Docker images
+      command: docker image prune -f
+
+
     - name: Get Image From Dockerhub
       command: docker pull abdelrahmangazy/weatherapp:latest
+
     - name: Run Container
       command: docker run -d -p 5000:5000 --name weatherapp abdelrahmangazy/weatherapp:latest
