@@ -45,6 +45,7 @@
     
     - name: Stop the container
       shell: docker stop weatherapp 2>>/dev/null
+      ignore_errors: yes
 
     - name: Remove the container
       shell: docker rm -f weatherapp 2>>/dev/null
