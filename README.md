@@ -25,3 +25,39 @@ A Flask-based weather application that fetches real-time weather data from OpenW
 ```bash
 git clone https://github.com/Abdelrahman142/weatherapp.git
 cd weatherapp
+```
+2️⃣ Run with Docker
+
+```bash
+docker build -t abdelrahmangazy/weatherapp:latest .
+docker run -d -p 5000:5000 --name weatherapp abdelrahmangazy/weatherapp:latest
+```
+3️⃣ Deploy with Ansible (on Vagrant VMs)
+```bash
+cd Ansible
+ansible-playbook -i inventory docker-deploy.yml
+```
+
+🖥️ Running on Jenkins CI/CD
+Pipeline Stages:
+Clone Repository: Fetch the latest code.
+Build Docker Image: Create an image from the Flask app.
+Push to Docker Hub: Upload the image for deployment.
+Deploy with Ansible: Automate deployment on Vagrant instances.
+To trigger the pipeline manually:
+```bash
+jenkins build weatherapp
+```
+🌎 API Endpoints
+Method	Endpoint	Description
+GET	/	Home page with search form
+GET	/weather?city=London	Get weather data for a city
+GET	/cities	Fetch stored cities
+POST	/delete_city	Delete a city from database
+
+You can check running containers with:
+```bash
+docker ps
+```
+
+
