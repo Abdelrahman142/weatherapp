@@ -48,12 +48,6 @@ To trigger the pipeline manually:
 ```bash
 jenkins build weatherapp
 ```
-🌎 API Endpoints
-Method	Endpoint	Description
-GET	/	Home page with search form
-GET	/weather?city=London	Get weather data for a city
-GET	/cities	Fetch stored cities
-POST	/delete_city	Delete a city from database
 
 You can check running containers with:
 ```bash
