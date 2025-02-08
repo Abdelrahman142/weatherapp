@@ -15,7 +15,7 @@ A Flask-based weather application that fetches real-time weather data from OpenW
 - **Database**: SQLite
 - **Containerization**: Docker
 - **Automation**: Jenkins, Ansible, Vagrant
-- **Deployment**: Vagrant vms
+- **Deployment**: Vagrant vms.
 
 ---
 
