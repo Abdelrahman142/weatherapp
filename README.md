@@ -52,7 +52,18 @@ Running on Jenkins CI/CD
 - 4️⃣ Deploy to Minikube → Restart the deployment for the latest changes.
 - 5️⃣ Deploy with Ansible (on Vagrant VMs)
 
-  
+Jenkins Deployment
+
+Jenkins is used for automating the build and deployment process.
+
+1. Install Jenkins
+```bash
+sudo apt update && sudo apt install openjdk-11-jdk -y
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+echo "deb http://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list
+sudo apt update && sudo apt install jenkins -y
+sudo systemctl enable --now jenkins
+```
 To trigger the pipeline manually:
 ```bash
 jenkins build weatherapp
@@ -117,9 +128,14 @@ git clone https://github.com/Abdelrahman142/weatherapp.git
 cd weatherapp/Ansible
 ```
 Run the Ansible playbook:
+Note: verify the owner of private keys is jenkins to can access it by jenkins 
 ```
 ansible-playbook -i inventory docker-deploy.yml
 ```
+- you can change owner by this commaned:
+  ```
+  sudo chown jenkins:jenkins <path to file> 
+  ```
 ![Screenshot from 2025-02-12 00-22-35](https://github.com/user-attachments/assets/b86f6a04-2123-4a2a-8eaa-a67b2bafa78f)
 
 Verify the deployment:
@@ -181,11 +197,12 @@ kubectl get pods
 
 kubectl rollout restart deployment/weather-app
 ```
-To trigger the pipeline manually:
+To trigger the pipeline manually: Go to 
 ```bash
-
-jenkins build weatherapp
+localhost:8080
 ```
+and create a new pipline and configere it
+- Add your ceridintal in to jenkins and use replace the jenkinsfile with your id  
 🔍 Useful Commands
 
 Check running containers:
@@ -243,6 +260,12 @@ Login to ArgoCD:
 ```bash
 
 argocd login localhost:8080
+```
+3. Log in to ArgoCD
+
+Retrieve initial password:
+```
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 Deploy the application with ArgoCD:
 ```bash
