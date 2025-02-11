@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: "https://github.com/Abdelrahman142/weatherapp.git"
-    targetRevision: HEAD
+    targetRevision: main
     path: "."
   destination:
     server: "https://kubernetes.default.svc"
