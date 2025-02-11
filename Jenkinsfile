@@ -22,10 +22,8 @@ pipeline {
                 }
             }
         }
-    }
-}
 
- stage('Build Docker Image') {
+        stage('Build Docker Image') {
             steps {
                 sh '''
                     cd weatherapp
@@ -45,33 +43,24 @@ pipeline {
             }
         }
 
-
-
-        
-//         stage('Deploy with Ansible') {
-//             steps {
-//                 sh '''
-//                     # Navigate to the Ansible directory
-//                     cd weatherapp/Ansible
-//                     # Run the Ansible playbook
-//                     ansible-playbook -i inventory docker-deploy.yml
-//                 '''
-//             }
-//         }
-//     }
-// }
-
-
-stage('Deploy to Minikube') {
+        stage('Deploy to Minikube') {
             steps {
                 sh '''
-                kubectl rollout restart deployment/weather-app
+                    kubectl rollout restart deployment/weather-app
                 '''
             }
         }
+
+        // Uncomment this if you want to deploy with Ansible
+        // stage('Deploy with Ansible') {
+        //     steps {
+        //         sh '''
+        //             # Navigate to the Ansible directory
+        //             cd weatherapp/Ansible
+        //             # Run the Ansible playbook
+        //             ansible-playbook -i inventory docker-deploy.yml
+        //         '''
+        //     }
+        // }
     }
 }
-
-       
-
-    
