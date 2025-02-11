@@ -84,7 +84,7 @@ docker build -t abdelrahmangazy/weatherapp:latest .
 ```bash
 
 kubectl apply -f deployment.yaml
-kubectl apply -f service.yaml
+kubectl apply -f weather-app-service.yaml
 ```
 5️⃣ Expose the Service
 ```bash
