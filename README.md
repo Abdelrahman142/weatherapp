@@ -137,7 +137,8 @@ Verify the deployment:
 ![Screenshot from 2025-02-12 00-11-14](https://github.com/user-attachments/assets/65e5fcb2-0fbc-42ef-bfce-bc79de4a7c2b)
 
     curl http://192.168.56.11:5000
-![Screenshot from 2025-02-12 00-11-24](https://github.com/user-attachments/assets/57d92672-974b-44c0-a1d9-07ad3313fe51)
+![Screenshot from 2025-02-12 00-44-08](https://github.com/user-attachments/assets/20f8582e-5f12-41c3-a512-888edb5188a6)
+
 
 ```
 📌 Benefits of Ansible Deployment:
