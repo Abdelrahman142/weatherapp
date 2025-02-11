@@ -8,25 +8,27 @@ pipeline {
 
     }
 
+    pipeline {
+    agent any
+
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
-                withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
-                    sh '''
-                        if [ -d "weatherapp" ]; then
-                            cd weatherapp
-                            git checkout main
-                            git pull --rebase origin main
-                            
-                        else
-                            git clone https://${GIT_USER_NAME}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git weatherapp
-                            cd weatherapp
-                            git checkout main
-                        fi
-                    '''
+                script {
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: [[name: '*/main']],
+                        userRemoteConfigs: [[
+                            url: 'https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git',
+                            credentialsId: 'github'
+                        ]]
+                    ])
                 }
             }
         }
+    }
+}
+
  stage('Build Docker Image') {
             steps {
                 sh '''
