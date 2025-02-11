@@ -5,11 +5,7 @@ pipeline {
         DOCKER_IMAGE = "abdelrahmangazy/weatherapp:latest"
         GIT_REPO_NAME = "weatherapp"
         GIT_USER_NAME = "Abdelrahman142"
-
     }
-
-    pipeline {
-    agent any
 
     stages {
         stage('Checkout') {
@@ -19,7 +15,7 @@ pipeline {
                         $class: 'GitSCM',
                         branches: [[name: '*/main']],
                         userRemoteConfigs: [[
-                            url: 'https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git',
+                            url: "https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git",
                             credentialsId: 'github'
                         ]]
                     ])
