@@ -299,7 +299,7 @@ Under "Extended E-mail Notification":
        - Password: (Use an App Password if 2FA is enabled)
     Use SSL: ✅ Checked
     - SMTP Port: 465
-    Reply-To Address: your-email@gmail.com
+   - Reply-To Address: your-email@gmail.com
     Charset: UTF-8
     Click Save.
 
