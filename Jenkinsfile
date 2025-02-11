@@ -68,7 +68,6 @@ stage('Deploy to Minikube') {
             steps {
                 sh '''
                 kubectl apply -f weather-deployment.yaml
-                kubectl rollout status deployment/weather-app
                 '''
             }
         }
