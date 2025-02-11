@@ -7,7 +7,7 @@ pipeline {
         GIT_USER_NAME = "Abdelrahman142"
     }
 
-    stages {
+    stages {  
         stage('Clone Repository') {
             steps {
                 git credentialsId: 'github', url: 'https://github.com/Abdelrahman142/weatherapp.git', branch: 'main'
