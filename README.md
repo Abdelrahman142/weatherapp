@@ -47,12 +47,14 @@ cd Ansible
 ansible-playbook -i inventory docker-deploy.yml
 ```
 
-🖥️ Running on Jenkins CI/CD
+Running on Jenkins CI/CD
 Pipeline Stages:
-Clone Repository: Fetch the latest code.
-Build Docker Image: Create an image from the Flask app.
-Push to Docker Hub: Upload the image for deployment.
-Deploy with Ansible: Automate deployment on Vagrant instances.
+
+1️⃣ Checkout Repository → Fetch the latest code.
+2️⃣ Build Docker Image → Create an image from the Flask app.
+3️⃣ Push to Docker Hub → Upload the image for deployment.
+4️⃣ Deploy to Minikube → Restart the deployment for the latest changes.
+5️⃣ Deploy with Ansible (on Vagrant VMs)
 To trigger the pipeline manually:
 ```bash
 jenkins build weatherapp
