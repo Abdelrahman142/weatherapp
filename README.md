@@ -96,9 +96,9 @@ vagrant ssh
 
 📌 Vagrant Benefits in this project:
 
-✅ Easy setup for local development
-✅ Consistent development environment
-✅ Pre-configured dependencies
+- ✅ Easy setup for local development
+- ✅ Consistent development environment
+- ✅ Pre-configured dependencies
 
 
 Deploy with Ansible
