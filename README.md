@@ -65,7 +65,11 @@ To trigger the pipeline manually: Go to
 localhost:8080
 ```
 and create a new pipline and configere it
-- Add your ceridintal in to jenkins and use replace the jenkinsfile with your id  
+- Add your ceridintal in to jenkins and use replace the jenkinsfile with your id
+  
+![Screenshot from 2025-02-12 00-55-28](https://github.com/user-attachments/assets/2b04e457-2799-4681-ba2f-c60fefea6be5)
+
+
 You can check running containers with:
 ```bash
 docker ps
