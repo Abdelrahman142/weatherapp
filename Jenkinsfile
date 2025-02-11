@@ -8,7 +8,7 @@ pipeline {
         RECIPIENT_EMAIL = 'abdodabos11@gmail.com'
     }
 
-    stages {  
+    stages {
         stage('Clone Repository') {
             steps {
                 git credentialsId: 'github-repo', url: 'https://github.com/Abdelrahman142/weatherapp.git', branch: 'main'
