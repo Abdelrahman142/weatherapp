@@ -64,5 +64,67 @@ You can check running containers with:
 ```bash
 docker ps
 ```
+Running on Minikube
+1️⃣ Start Minikube
+```bash
 
+minikube start
+```
+2️⃣ Enable Docker inside Minikube
+```bash
 
+eval $(minikube docker-env)
+```
+3️⃣ Build the Docker Image inside Minikube
+```bash
+
+docker build -t abdelrahmangazy/weatherapp:latest .
+```
+4️⃣ Apply Kubernetes Configurations
+```bash
+
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+```
+5️⃣ Expose the Service
+```bash
+
+minikube service weather-app --url
+```
+This will return a URL that you can open in your browser to access the weather app.
+6️⃣ Check Running Pods
+```bash
+
+kubectl get pods
+```
+7️⃣ Restart Deployment if Needed
+```bash
+
+kubectl rollout restart deployment/weather-app
+```
+🖥️ Running on Jenkins CI/CD
+Pipeline Stages:
+
+1️⃣ Checkout Repository → Fetch the latest code.
+2️⃣ Build Docker Image → Create an image from the Flask app.
+3️⃣ Push to Docker Hub → Upload the image for deployment.
+4️⃣ Deploy to Minikube → Restart the deployment for the latest changes.
+5️⃣ Deploy with Ansible (on Vagrant VMs).
+
+To trigger the pipeline manually:
+```bash
+
+jenkins build weatherapp
+```
+🔍 Useful Commands
+
+Check running containers:
+```bash
+
+kubectl get services
+```
+Check logs of a running pod:
+```bash
+
+kubectl logs -f <pod-name>
+```
