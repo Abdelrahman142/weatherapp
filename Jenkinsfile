@@ -34,25 +34,25 @@ pipeline {
             }
         }
 
-        // stage('Deploy with Ansible') {
-        //     steps {
-        //         sh '''
-        //             # Navigate to the Ansible directory
-        //             cd Ansible
-        //             # Run the Ansible playbook
-        //             ansible-playbook -i inventory docker-deploy.yml
-        //         '''
-        //     }
-        // }
-
-        stage('Deploy to Minikube') {
+        stage('Deploy with Ansible') {
             steps {
                 sh '''
-                    kubectl rollout restart deployment/weather-app
+                    # Navigate to the Ansible directory
+                    cd Ansible
+                    # Run the Ansible playbook
+                    ansible-playbook -i inventory docker-deploy.yml
                 '''
             }
         }
-    }
+
+    //     stage('Deploy to Minikube') {
+    //         steps {
+    //             sh '''
+    //                 kubectl rollout restart deployment/weather-app
+    //             '''
+    //         }
+    //     }
+    // }
 
     post {
         success {
