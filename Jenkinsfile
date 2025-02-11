@@ -67,8 +67,8 @@ pipeline {
 stage('Deploy to Minikube') {
             steps {
                 sh '''
-                kubectl set image deployment/weather-app weather-app=$DOCKER_IMAGE
-                kubectl rollout status deployment/weather-app
+                sudo kubectl set image deployment/weather-app weather-app=$DOCKER_IMAGE
+                sudo kubectl rollout status deployment/weather-app
                 '''
             }
         }
