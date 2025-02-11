@@ -5,19 +5,18 @@ pipeline {
         DOCKER_IMAGE = "abdelrahmangazy/weatherapp:latest"
         GIT_REPO_NAME = "weatherapp"
         GIT_USER_NAME = "Abdelrahman142"
-
     }
 
+    stages {
         stage('Clone Repository') {
             steps {
                 git credentialsId: 'github', url: 'https://github.com/Abdelrahman142/weatherapp.git', branch: 'main'
             }
         }
     }
+}
 
-   
-
-
+  
   
  stage('Build Docker Image') {
             steps {
