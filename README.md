@@ -231,7 +231,10 @@ Access the ArgoCD UI:
 ```bash
 
 kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+Note: IF YOU RUN JENKENS IN PORT 8080 CHANGE PORT FORWARD TO 8081 OR ANY OTHER PORT
 
+```
 Then, open https://localhost:8080.
 ```
 Login to ArgoCD:
@@ -255,6 +258,7 @@ Sync the application:
 
     argocd app sync weatherapp
 ```
+
 📌 ArgoCD Benefits in this project:
 
 ✅ Automated GitOps deployment
@@ -263,12 +267,13 @@ Sync the application:
 
 🔧 Configuration Steps:
 
-    Ensure Jenkins has the Email Extension Plugin installed.
+-   Ensure Jenkins has the Email Extension Plugin installed.
 
-    Go to Manage Jenkins → Configure System → Extended E-mail Notification and configure SMTP settings.
+-   Go to Manage Jenkins → Configure System → Extended E-mail Notification and configure SMTP settings.
 
-    The pipeline includes the following post block:
-
+-    The pipeline includes the following post block:
+    
+     
   ```bash
 post {
     success {
