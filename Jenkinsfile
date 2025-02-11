@@ -67,7 +67,7 @@ pipeline {
 stage('Deploy to Minikube') {
             steps {
                 sh '''
-                kubectl apply -f weather-deployment.yaml
+                kubectl rollout restart deployment/weather-app
                 '''
             }
         }
