@@ -27,10 +27,11 @@ git clone https://github.com/Abdelrahman142/weatherapp.git
 cd weatherapp
 
 ---
-
+```
 ## 📦 Setup Instructions
 
 ### 1️⃣ Clone the Repository
+
 ```bash
 git clone https://github.com/Abdelrahman142/weatherapp.git
 cd weatherapp
@@ -70,14 +71,17 @@ docker ps
 
 This project supports Vagrant to set up a local development environment with VirtualBox.
 🔧 Setup Instructions:
-
+``
     Install Vagrant & VirtualBox:
         Download and install Vagrant
         Download and install VirtualBox
 
-    Clone the repository:
+Create the Vagrant environment and Edit it as you Like:
+```
+vagrant init
+```
+Then
 
-Start the Vagrant environment:
 ```bash
 vagrant up
 ```
@@ -98,7 +102,7 @@ Deploy with Ansible
 
 This project uses Ansible for automated deployment.
 📌 Prerequisites:
-
+``
     Install Ansible (if not installed):
 ```
 sudo apt update && sudo apt install ansible -y
