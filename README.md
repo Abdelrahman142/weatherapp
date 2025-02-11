@@ -147,6 +147,7 @@ Verify the deployment:
 
 
 ```
+```
 📌 Benefits of Ansible Deployment:
 
 ✅ Automated setup & deployment
@@ -156,6 +157,7 @@ Verify the deployment:
 
 Running on Minikube
 1️⃣ Start Minikube
+
 ```bash
 
 minikube start
