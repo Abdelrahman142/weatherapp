@@ -5,25 +5,29 @@ pipeline {
         DOCKER_IMAGE = "abdelrahmangazy/weatherapp:latest"
         GIT_REPO_NAME = "weatherapp"
         GIT_USER_NAME = "Abdelrahman142"
+
     }
 
     stages {
-        stage('Checkout') {
+        stage('Clone Repository') {
             steps {
-                script {
-                    checkout([
-                        $class: 'GitSCM',
-                        branches: [[name: '*/main']],
-                        userRemoteConfigs: [[
-                            url: "https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git",
-                            credentialsId: 'github'
-                        ]]
-                    ])
+                withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                    sh '''
+                        if [ -d "weatherapp" ]; then
+                            cd weatherapp
+                            git checkout main
+                            git pull --rebase origin main
+                            
+                        else
+                            git clone https://${GIT_USER_NAME}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git weatherapp
+                            cd weatherapp
+                            git checkout main
+                        fi
+                    '''
                 }
             }
         }
-
-        stage('Build Docker Image') {
+ stage('Build Docker Image') {
             steps {
                 sh '''
                     cd weatherapp
@@ -43,24 +47,33 @@ pipeline {
             }
         }
 
-        stage('Deploy to Minikube') {
+
+
+        
+//         stage('Deploy with Ansible') {
+//             steps {
+//                 sh '''
+//                     # Navigate to the Ansible directory
+//                     cd weatherapp/Ansible
+//                     # Run the Ansible playbook
+//                     ansible-playbook -i inventory docker-deploy.yml
+//                 '''
+//             }
+//         }
+//     }
+// }
+
+
+stage('Deploy to Minikube') {
             steps {
                 sh '''
-                    kubectl rollout restart deployment/weather-app
+                kubectl rollout restart deployment/weather-app
                 '''
             }
         }
-
-        // Uncomment this if you want to deploy with Ansible
-        // stage('Deploy with Ansible') {
-        //     steps {
-        //         sh '''
-        //             # Navigate to the Ansible directory
-        //             cd weatherapp/Ansible
-        //             # Run the Ansible playbook
-        //             ansible-playbook -i inventory docker-deploy.yml
-        //         '''
-        //     }
-        // }
     }
 }
+
+       
+
+    
