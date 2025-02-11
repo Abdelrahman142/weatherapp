@@ -52,7 +52,7 @@ pipeline {
                 '''
             }
         }
-    }
+    
 
     post {
     always {
@@ -63,5 +63,7 @@ pipeline {
         )
     }
 }
+    }
+
 
 
