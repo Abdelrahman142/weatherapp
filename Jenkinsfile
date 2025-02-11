@@ -34,16 +34,16 @@ pipeline {
             }
         }
 
-        stage('Deploy with Ansible') {
-            steps {
-                sh '''
-                    # Navigate to the Ansible directory
-                    cd Ansible
-                    # Run the Ansible playbook
-                    ansible-playbook -i inventory docker-deploy.yml
-                '''
-            }
-        }
+        // stage('Deploy with Ansible') {
+        //     steps {
+        //         sh '''
+        //             # Navigate to the Ansible directory
+        //             cd Ansible
+        //             # Run the Ansible playbook
+        //             ansible-playbook -i inventory docker-deploy.yml
+        //         '''
+        //     }
+        // }
 
         stage('Deploy to Minikube') {
             steps {
