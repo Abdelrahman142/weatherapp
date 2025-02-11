@@ -52,18 +52,29 @@ pipeline {
             }
         }
     }
+
+    post {
+        success {
+            emailext subject: "Jenkins Build Successful: ${env.JOB_NAME}",
+                     body: """
+                     ✅ Jenkins Build Succeeded!
+                     - Job Name: ${env.JOB_NAME}
+                     - Build Number: ${env.BUILD_NUMBER}
+                     - View Build: ${env.BUILD_URL}
+                     """,
+                     to: "${RECIPIENT_EMAIL}"
+        }
+        failure {
+            emailext subject: "Jenkins Build Failed: ${env.JOB_NAME}",
+                     body: """
+                     ❌ Jenkins Build Failed!
+                     - Job Name: ${env.JOB_NAME}
+                     - Build Number: ${env.BUILD_NUMBER}
+                     - View Logs: ${env.BUILD_URL}
+                     """,
+                     to: "${RECIPIENT_EMAIL}"
+        }
+    }
 }
 
-post {
-    success {
-        emailext subject: " Jenkins Build Successful: ${env.JOB_NAME}",
-                 body: "The Jenkins build for ${env.JOB_NAME} completed successfully. \nBuild URL: ${env.BUILD_URL}",
-                 to: "your_email@example.com"
-    }
-    failure {
-        emailext subject: " Jenkins Build Failed: ${env.JOB_NAME}",
-                 body: "The Jenkins build for ${env.JOB_NAME} has failed. \nCheck the logs here: ${env.BUILD_URL}",
-                 to: "your_email@example.com"
-    }
-}
 
