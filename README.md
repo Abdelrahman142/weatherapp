@@ -10,6 +10,8 @@ Additionally, the application is now integrated with **Minikube** for Kubernetes
 ✅ Deployable via **Docker & Jenkins CI/CD**.  
 ✅ Automated setup using **Ansible & Vagrant**.  
 ✅ **Kubernetes support** using Minikube.  
+✅ **NGINX** to act as a  load blancer.  
+
 
 ## 🛠️ Technologies Used
 - **Backend**: Flask (Python)
@@ -17,6 +19,7 @@ Additionally, the application is now integrated with **Minikube** for Kubernetes
 - **Containerization**: Docker
 - **Automation**: Jenkins, Ansible, Vagrant
 - **Orchestration**: Kubernetes (Minikube)
+- **NGINX**: Load Balancer
 - **Deployment**: Vagrant VMs / Minikube
 
 ## 📦 Setup Instructions
@@ -162,7 +165,7 @@ docker build -t abdelrahmangazy/weatherapp:latest .
 ```
 4️⃣ Apply Kubernetes Configurations
 ```bash
-
+minikube addons enable ingress
 kubectl apply -f deployment.yaml
 kubectl apply -f weather-app-service.yaml
 ```
@@ -200,6 +203,11 @@ Check logs of a running pod:
 ```bash
 
 kubectl logs -f <pod-name>
+```
+Chack ingress Service Working 
+Go to 
+```
+weather.locl
 ```
 ![Screenshot from 2025-02-11 23-11-44](https://github.com/user-attachments/assets/d75bbcda-9a09-49ee-b50f-ac552e921cf1)
 
