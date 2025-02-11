@@ -290,8 +290,21 @@ Sync the application:
 -   Ensure Jenkins has the Email Extension Plugin installed.
 
 -   Go to Manage Jenkins → Configure System → Extended E-mail Notification and configure SMTP settings.
+-   Go to Jenkins Dashboard → Manage Jenkins → Configure System.
+Under "Extended E-mail Notification":
+
+    SMTP Server: Set it to smtp.gmail.com
+    Use SMTP Authentication: ✅ Checked
+       - Username: your-email@gmail.com
+       - Password: (Use an App Password if 2FA is enabled)
+    Use SSL: ✅ Checked
+    - SMTP Port: 465
+    Reply-To Address: your-email@gmail.com
+    Charset: UTF-8
+    Click Save.
 
 -    The pipeline includes the following post block:
+-    replace  example@.com with your email
     
      
   ```bash
@@ -300,14 +313,14 @@ post {
         emailext (
             subject: "✅ Jenkins Build Successful: ${env.JOB_NAME}",
             body: "The Jenkins build for ${env.JOB_NAME} completed successfully. 🎉\nBuild URL: ${env.BUILD_URL}",
-            to: "abdodabos11@gmail.com"
+            to: "example@.com"
         )
     }
     failure {
         emailext (
             subject: "❌ Jenkins Build Failed: ${env.JOB_NAME}",
             body: "The Jenkins build for ${env.JOB_NAME} has failed. ⚠️\nCheck the logs here: ${env.BUILD_URL}",
-            to: "abdodabos11@gmail.com"
+            to: "example@.com"
         )
     }
 }
