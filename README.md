@@ -48,13 +48,15 @@ ansible-playbook -i inventory docker-deploy.yml
 ```
 
 Running on Jenkins CI/CD
-Pipeline Stages:
+##Pipeline Stages:
 
-1️⃣ Checkout Repository → Fetch the latest code.
-2️⃣ Build Docker Image → Create an image from the Flask app.
-3️⃣ Push to Docker Hub → Upload the image for deployment.
-4️⃣ Deploy to Minikube → Restart the deployment for the latest changes.
-5️⃣ Deploy with Ansible (on Vagrant VMs)
+- 1️⃣ Checkout Repository → Fetch the latest code.
+- 2️⃣ Build Docker Image → Create an image from the Flask app.
+- 3️⃣ Push to Docker Hub → Upload the image for deployment.
+- 4️⃣ Deploy to Minikube → Restart the deployment for the latest changes.
+- 5️⃣ Deploy with Ansible (on Vagrant VMs)
+
+  
 To trigger the pipeline manually:
 ```bash
 jenkins build weatherapp
@@ -64,6 +66,80 @@ You can check running containers with:
 ```bash
 docker ps
 ```
+📦 Local Development with Vagrant
+
+This project supports Vagrant to set up a local development environment with VirtualBox.
+🔧 Setup Instructions:
+
+    Install Vagrant & VirtualBox:
+        Download and install Vagrant
+        Download and install VirtualBox
+
+    Clone the repository:
+
+Start the Vagrant environment:
+```bash
+vagrant up
+```
+Access the virtual machine:
+```bash
+
+vagrant ssh
+```
+
+📌 Vagrant Benefits in this project:
+
+✅ Easy setup for local development
+✅ Consistent development environment
+✅ Pre-configured dependencies
+
+
+Deploy with Ansible
+
+This project uses Ansible for automated deployment.
+📌 Prerequisites:
+
+    Install Ansible (if not installed):
+```
+sudo apt update && sudo apt install ansible -y
+```
+Configure your inventory file:
+`
+    Edit Ansible/inventory and add your server's IP:
+```
+    [web]
+    your_server_ip ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa
+```
+⚡ Deployment Steps:
+``
+    Clone the repository:
+```
+git clone https://github.com/Abdelrahman142/weatherapp.git
+cd weatherapp/Ansible
+```
+Run the Ansible playbook:
+```
+ansible-playbook -i inventory docker-deploy.yml
+```
+![Screenshot from 2025-02-12 00-22-35](https://github.com/user-attachments/assets/b86f6a04-2123-4a2a-8eaa-a67b2bafa78f)
+
+Verify the deployment:
+```
+    curl http://192.168.56.10:5000
+```
+![Screenshot from 2025-02-12 00-11-14](https://github.com/user-attachments/assets/65e5fcb2-0fbc-42ef-bfce-bc79de4a7c2b)
+
+    curl http://192.168.56.11:5000
+![Screenshot from 2025-02-12 00-11-24](https://github.com/user-attachments/assets/57d92672-974b-44c0-a1d9-07ad3313fe51)
+
+```
+📌 Benefits of Ansible Deployment:
+
+✅ Automated setup & deployment
+✅ Scalable infrastructure
+✅ Easier server configuration
+
+
 Running on Minikube
 1️⃣ Start Minikube
 ```bash
