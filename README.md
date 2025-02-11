@@ -134,17 +134,18 @@ ansible-playbook -i inventory docker-deploy.yml
 ```
 - you can change owner by this commaned:
   ```
-  sudo chown jenkins:jenkins <path to file> 
+  sudo chown jenkins:jenkins <path to file>
+  sudo chmod 600 <path to file>
   ```
 ![Screenshot from 2025-02-12 00-22-35](https://github.com/user-attachments/assets/b86f6a04-2123-4a2a-8eaa-a67b2bafa78f)
 
 Verify the deployment:
 ```
-    curl http://192.168.56.10:5000
+    http://192.168.56.10:5000
 ```
 ![Screenshot from 2025-02-12 00-11-14](https://github.com/user-attachments/assets/65e5fcb2-0fbc-42ef-bfce-bc79de4a7c2b)
 
-    curl http://192.168.56.11:5000
+    http://192.168.56.11:5000
 ![Screenshot from 2025-02-12 00-44-08](https://github.com/user-attachments/assets/20f8582e-5f12-41c3-a512-888edb5188a6)
 
 
