@@ -166,8 +166,9 @@ docker build -t abdelrahmangazy/weatherapp:latest .
 4️⃣ Apply Kubernetes Configurations
 ```bash
 minikube addons enable ingress
-kubectl apply -f deployment.yaml
-kubectl apply -f weather-app-service.yaml
+kubectl apply -f deployment.yaml   #application
+kubectl apply -f weather-app-service.yaml   #serviec
+kubectl applu -f weather-ingress.yaml   # Nginx
 ```
 5️⃣ Expose the Service
 ```bash
