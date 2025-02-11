@@ -55,15 +55,13 @@ pipeline {
     }
 
     post {
-        always {
-            emailext (
+    always {
+        emailext (
             to: 'abdodabos11@gmail.com',
             subject: "Build ${currentBuild.fullDisplayName}",
             body: "Build ${currentBuild.fullDisplayName} finished with status: ${currentBuild.currentResult}"
         )
     }
-
-
 }
 
 
