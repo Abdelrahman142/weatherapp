@@ -5,6 +5,7 @@ pipeline {
         DOCKER_IMAGE = "abdelrahmangazy/weatherapp:latest"
         GIT_REPO_NAME = "weatherapp"
         GIT_USER_NAME = "Abdelrahman142"
+        RECIPIENT_EMAIL = 'abdodabos11@gmail.com'
     }
 
     stages {  
