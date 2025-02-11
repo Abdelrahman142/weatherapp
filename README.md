@@ -37,11 +37,6 @@ cd weatherapp
 docker build -t abdelrahmangazy/weatherapp:latest .
 docker run -d -p 5000:5000 --name weatherapp abdelrahmangazy/weatherapp:latest
 ```
-3️⃣ Deploy with Ansible (on Vagrant VMs)
-```bash
-cd Ansible
-ansible-playbook -i inventory docker-deploy.yml
-```
 
 Running on Jenkins CI/CD
 ##Pipeline Stages:
@@ -64,11 +59,13 @@ echo "deb http://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sourc
 sudo apt update && sudo apt install jenkins -y
 sudo systemctl enable --now jenkins
 ```
-To trigger the pipeline manually:
-```bash
-jenkins build weatherapp
-```
 
+To trigger the pipeline manually: Go to 
+```bash
+localhost:8080
+```
+and create a new pipline and configere it
+- Add your ceridintal in to jenkins and use replace the jenkinsfile with your id  
 You can check running containers with:
 ```bash
 docker ps
@@ -198,12 +195,7 @@ kubectl get pods
 
 kubectl rollout restart deployment/weather-app
 ```
-To trigger the pipeline manually: Go to 
-```bash
-localhost:8080
-```
-and create a new pipline and configere it
-- Add your ceridintal in to jenkins and use replace the jenkinsfile with your id  
+
 🔍 Useful Commands
 
 Check running containers:
