@@ -13,15 +13,10 @@ pipeline {
                 git credentialsId: 'github', url: 'https://github.com/Abdelrahman142/weatherapp.git', branch: 'main'
             }
         }
-    }
-}
 
-  
-  
- stage('Build Docker Image') {
+        stage('Build Docker Image') {
             steps {
                 sh '''
-                    cd weatherapp
                     docker build -t ${DOCKER_IMAGE} .
                 '''
             }
@@ -38,33 +33,23 @@ pipeline {
             }
         }
 
+        // stage('Deploy with Ansible') {
+        //     steps {
+        //         sh '''
+        //             # Navigate to the Ansible directory
+        //             cd Ansible
+        //             # Run the Ansible playbook
+        //             ansible-playbook -i inventory docker-deploy.yml
+        //         '''
+        //     }
+        // }
 
-
-        
-//         stage('Deploy with Ansible') {
-//             steps {
-//                 sh '''
-//                     # Navigate to the Ansible directory
-//                     cd weatherapp/Ansible
-//                     # Run the Ansible playbook
-//                     ansible-playbook -i inventory docker-deploy.yml
-//                 '''
-//             }
-//         }
-//     }
-// }
-
-
-stage('Deploy to Minikube') {
+        stage('Deploy to Minikube') {
             steps {
                 sh '''
-                kubectl rollout restart deployment/weather-app
+                    kubectl rollout restart deployment/weather-app
                 '''
             }
         }
     }
 }
-
-       
-
-    
