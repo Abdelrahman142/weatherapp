@@ -3,7 +3,9 @@
 A **Flask-based** weather application that fetches real-time weather data from OpenWeatherMap and stores search history in **SQLite**.  
 This project is fully containerized using **Docker**, deployed via **Jenkins**, and orchestrated with **Ansible** on **Vagrant VMs**.  
 Additionally, the application is now integrated with **Minikube** for Kubernetes deployment.
-
+##
+![Blank diagram(3)](https://github.com/user-attachments/assets/cd9ca509-da4a-4f21-9eca-4fcb0e73b484)
+##
 ## 🚀 Features
 ✅ Get real-time weather information for any city.  
 ✅ Store last searched city in an **SQLite database**.  
