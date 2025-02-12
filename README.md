@@ -24,8 +24,6 @@ Additionally, the application is now integrated with **Minikube** for Kubernetes
 - **NGINX**: Load Balancer
 - **Deployment**: Vagrant VMs / Minikube
 
-```
-```
 ## 📦 Setup Instructions
 
 ### 1️⃣ Clone the Repository
