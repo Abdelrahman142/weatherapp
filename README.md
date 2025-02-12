@@ -25,6 +25,7 @@ Additionally, the application is now integrated with **Minikube** for Kubernetes
 - **Deployment**: Vagrant VMs / Minikube
 
 ```
+```
 ## 📦 Setup Instructions
 
 ### 1️⃣ Clone the Repository
