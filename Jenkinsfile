@@ -45,13 +45,13 @@ pipeline {
             }
         }
 
-    //     stage('Deploy to Minikube') {
-    //         steps {
-    //             sh '''
-    //                 kubectl rollout restart deployment/weather-app
-    //             '''
-    //         }
-    //     }
+        stage('Deploy to Minikube') {
+            steps {
+                sh '''
+                    kubectl rollout restart deployment/weather-app
+                '''
+            }
+        }
     }
 
     post {
