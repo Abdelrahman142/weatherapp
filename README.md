@@ -69,8 +69,7 @@ and create a new pipline and configere it
 - Add your ceridintal in to jenkins and use replace the jenkinsfile with your id
 - then click Build Now
   
-![Screenshot from 2025-02-12 00-55-28](https://github.com/user-attachments/assets/2b04e457-2799-4681-ba2f-c60fefea6be5)
-
+![Screenshot from 2025-02-14 12-02-19](https://github.com/user-attachments/assets/aeb3787a-0d24-45f6-9e6f-952f997fc3eb)
 
 You can check running containers with:
 ```bash
