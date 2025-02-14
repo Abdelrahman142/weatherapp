@@ -15,7 +15,7 @@ pipeline {
             }
         }
 
-     stage('Build Docker Image') {
+        stage('Build Docker Image') {
             steps {
                 sh '''
                     docker build -t ${DOCKER_IMAGE} .
@@ -37,11 +37,9 @@ pipeline {
         stage('Deploy with Ansible') {
             steps {
                 sh '''
-                    # Navigate to the Ansible directory
                     cd Ansible
                     chmod 600 private_key1
                     chmod 600 private_key2
-                    # Run the Ansible playbook
                     ansible-playbook -i inventory docker-deploy.yml
                 '''
             }
@@ -60,15 +58,25 @@ pipeline {
         success {
             emailext (
                 subject: "✅ Jenkins Build Successful: ${env.JOB_NAME}",
-                body: "The Jenkins build for ${env.JOB_NAME} completed successfully. 🎉\nBuild URL: ${env.BUILD_URL}",
-                to: "abdodabos11@gmail.com"
+                body: """
+                <h3>Jenkins Build Successful</h3>
+                <p>The Jenkins build for <b>${env.JOB_NAME}</b> completed successfully. 🎉</p>
+                <p>Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                """,
+                mimeType: 'text/html',
+                to: RECIPIENT_EMAIL
             )
         }
         failure {
             emailext (
                 subject: "❌ Jenkins Build Failed: ${env.JOB_NAME}",
-                body: "The Jenkins build for ${env.JOB_NAME} has failed. ⚠️\nCheck the logs here: ${env.BUILD_URL}",
-                to: "abdodabos11@gmail.com"
+                body: """
+                <h3>Jenkins Build Failed</h3>
+                <p>The Jenkins build for <b>${env.JOB_NAME}</b> has failed. ⚠️</p>
+                <p>Check the logs here: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                """,
+                mimeType: 'text/html',
+                to: RECIPIENT_EMAIL
             )
         }
     }
