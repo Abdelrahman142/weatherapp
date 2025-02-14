@@ -39,6 +39,8 @@ pipeline {
                 sh '''
                     # Navigate to the Ansible directory
                     cd Ansible
+                    chmod 600 private_key1
+                    chmod 600 private_key2
                     # Run the Ansible playbook
                     ansible-playbook -i inventory docker-deploy.yml
                 '''
