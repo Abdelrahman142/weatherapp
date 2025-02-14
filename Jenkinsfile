@@ -15,35 +15,35 @@ pipeline {
             }
         }
 
-        // stage('Build Docker Image') {
-        //     steps {
-        //         sh '''
-        //             docker build -t ${DOCKER_IMAGE} .
-        //         '''
-        //     }
-        // }
+        stage('Build Docker Image') {
+            steps {
+                sh '''
+                    docker build -t ${DOCKER_IMAGE} .
+                '''
+            }
+        }
 
-        // stage('Push Docker Image') {
-        //     steps {
-        //         withCredentials([usernamePassword(credentialsId: 'docker-cred', usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
-        //             sh '''
-        //                 echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-        //                 docker push ${DOCKER_IMAGE}
-        //             '''
-        //         }
-        //     }
-        // }
+        stage('Push Docker Image') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-cred', usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
+                    sh '''
+                        echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+                        docker push ${DOCKER_IMAGE}
+                    '''
+                }
+            }
+        }
 
-        // stage('Deploy with Ansible') {
-        //     steps {
-        //         sh '''
-        //             cd Ansible
-        //             chmod 600 private_key1
-        //             chmod 600 private_key2
-        //             ansible-playbook -i inventory docker-deploy.yml
-        //         '''
-        //     }
-        // }
+        stage('Deploy with Ansible') {
+            steps {
+                sh '''
+                    cd Ansible
+                    chmod 600 private_key1
+                    chmod 600 private_key2
+                    ansible-playbook -i inventory docker-deploy.yml
+                '''
+            }
+        }
 
         stage('Deploy to Minikube') {
             steps {
